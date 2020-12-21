@@ -1,4 +1,4 @@
-package com.example.firebaseandroidauthsample
+package com.kulloveth.firebaseandroidauthsample
 
 import org.junit.Test
 
