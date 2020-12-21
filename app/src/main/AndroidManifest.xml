@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FirebaseAndroidAuthSample">
-        <activity android:name="com.kulloveth.firebaseandroidauthsample.ui.login.MainActivity">
+        <activity android:name="com.kulloveth.firebaseandroidauthsample.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

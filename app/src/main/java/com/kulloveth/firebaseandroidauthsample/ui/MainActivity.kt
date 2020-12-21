@@ -1,9 +1,11 @@
-package com.kulloveth.firebaseandroidauthsample.ui.login
+package com.kulloveth.firebaseandroidauthsample.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kulloveth.firebaseandroidauthsample.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
