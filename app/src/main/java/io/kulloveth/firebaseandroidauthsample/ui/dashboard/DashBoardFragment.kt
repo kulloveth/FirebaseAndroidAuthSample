@@ -41,12 +41,10 @@ class DashBoardFragment : Fragment() {
                 transformations(CircleCropTransformation())
             }
         } else {
-//            binding?.iv?.load(R.drawable.forgot_password) {
-//                transformations(CircleCropTransformation())
-//            }
+            binding?.iv?.load(R.drawable.ic_account_circle_24) {
+                transformations(CircleCropTransformation())
+            }
         }
-        Log.d("user", "user ${fAuth.currentUser?.photoUrl}")
-
 
         val args : DashBoardFragmentArgs by navArgs()
         binding?.signTv?.text = String.format(
