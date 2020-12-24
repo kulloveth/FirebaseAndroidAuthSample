@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dashboard.DashBoardFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/dimens_100dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/signTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_padding"
+            android:text="@string/user_greet"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidline" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/dimens_100dp"
+            android:layout_height="@dimen/dimens_100dp"
+            android:layout_margin="@dimen/standard_padding"
+            app:layout_constraintBottom_toBottomOf="@id/signTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/signTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

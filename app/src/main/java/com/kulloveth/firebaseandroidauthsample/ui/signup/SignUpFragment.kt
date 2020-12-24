@@ -6,13 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.kulloveth.firebaseandroidauthsample.R
 import com.kulloveth.firebaseandroidauthsample.databinding.FragmentSignUpBinding
 import com.kulloveth.firebaseandroidauthsample.ui.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.wellnesscity.data.model.Status
 import javax.inject.Inject
 
-
+fun View.showsnackBar(message:String){
+    Snackbar.make(this,message, Snackbar.LENGTH_LONG).show()
+}
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
@@ -37,37 +44,31 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding?.signUpBtn?.setOnClickListener {
-//            viewModel.signUpUser(
-//                binding?.emailEt?.text?.toString()!!,
-//                binding?.passwordEt?.text.toString()!!,
-//                binding?.fullNameEt?.text?.toString()!!
-//            )
-//                .observe(viewLifecycleOwner,
-//                    {
-//                        when (it.status) {
-//                            Status.SUCCESS -> {
-//                                view.showsnackBar("User account registered")
-//                                viewModel.saveUser(
-//                                    binding?.emailEt?.text?.toString()!!,
-//                                    binding?.fullNameEt?.text?.toString()!!
-//                                )
-//                            }
-//                            Status.ERROR -> {
-//                                view.showsnackBar(it.message!!)
-//                            }
-//                            Status.LOADING -> {
-//                                view.showsnackBar("...")
-//                            }
-//                        }
-//                    })
-//        }
-//        binding?.loginTv?.setOnClickListener {
-//            if (findNavController().currentDestination?.id == R.id.signUpFragment) {
-//                NavHostFragment.findNavController(this)
-//                    .navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-//            }
-//        }
+
+
+        binding?.signUpBtn?.setOnClickListener {
+            val emailText = binding?.emailEt?.text?.toString()
+            val passwordText =  binding?.passwordEt?.text.toString()
+            val fullNameText =  binding?.fullNameEt?.text?.toString()
+            viewModel.signUpUser( emailText!!, passwordText, fullNameText!!).observe(viewLifecycleOwner, {
+                        when (it.status) {
+                            Status.SUCCESS -> {
+                                view.showsnackBar("User account registered")
+                               // viewModel.saveUser( emailText, fullNameText)
+                            }
+                            Status.ERROR -> {
+                                view.showsnackBar(it.message!!)
+                            }
+                            Status.LOADING -> {
+                                view.showsnackBar("...")
+                            }
+                        } })
+        }
+        binding?.loginTv?.setOnClickListener {
+            if (findNavController().currentDestination?.id == R.id.signUpFragment) {
+                NavHostFragment.findNavController(this).navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+            }
+        }
 //        binding?.googleSignIn?.setOnClickListener {
 //            signIn()
 //        }

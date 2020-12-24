@@ -6,8 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.kulloveth.firebaseandroidauthsample.R
 import com.kulloveth.firebaseandroidauthsample.databinding.FragmentLoginBinding
+import com.kulloveth.firebaseandroidauthsample.ui.signup.showsnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import io.wellnesscity.data.model.Status
 
 
 @AndroidEntryPoint
@@ -30,32 +35,38 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding?.signInBtn?.setOnClickListener {
-//            viewModel.signInUser(
-//                binding?.emailEt?.text?.toString()!!,
-//                binding?.passwordEt?.text?.toString()!!
-//            ).observe(viewLifecycleOwner, {
-//                when (it.status) {
-//                    Status.LOADING -> {
-//                        view.showsnackBar("...")
-//                    }
-//
-//                    Status.SUCCESS -> {
-//                        view.showsnackBar("Login successful")
-//                        if (findNavController().currentDestination?.id == R.id.loginFragment) {
-//                            NavHostFragment.findNavController(this).navigate(
-//                                LoginFragmentDirections.actionLoginFragmentToMainFragment()
-//                            )
-//                        }
-//                    }
-//
-//                    Status.ERROR -> {
-//                        view.showsnackBar(it.message!!)
-//                    }
-//                }
-//            })
-//        }
-//
+
+
+
+        binding?.signUpTv?.setOnClickListener {
+
+            if (findNavController().currentDestination?.id == R.id.loginFragment) {
+                NavHostFragment.findNavController(this).navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+            }
+        }
+        binding?.signInBtn?.setOnClickListener {
+            val emailText = binding?.emailEt?.text?.toString()
+            val passwordText =  binding?.passwordEt?.text.toString()
+            viewModel.signInUser(emailText!!, passwordText).observe(viewLifecycleOwner, {
+                when (it.status) {
+                    Status.LOADING -> {
+                        view.showsnackBar("...")
+                    }
+
+                    Status.SUCCESS -> {
+                        view.showsnackBar("Login successful")
+                        if (findNavController().currentDestination?.id == R.id.loginFragment) {
+                            NavHostFragment.findNavController(this).navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        view.showsnackBar(it.message!!)
+                    }
+                }
+            })
+        }
+
 //        binding?.googleSignIn?.setOnClickListener {
 //            signIn()
 //        }
