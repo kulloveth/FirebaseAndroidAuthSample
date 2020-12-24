@@ -1,4 +1,4 @@
-package com.kulloveth.firebaseandroidauthsample.app
+package io.kulloveth.firebaseandroidauthsample.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.dashboard.DashBoardFragment">
+        tools:context="io.kulloveth.firebaseandroidauthsample.ui.dashboard.DashBoardFragment">
 
         <!-- TODO: Update blank fragment layout -->
 

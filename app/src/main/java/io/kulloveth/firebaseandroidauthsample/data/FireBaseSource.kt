@@ -1,6 +1,8 @@
-package com.kulloveth.firebaseandroidauthsample.data
+package io.kulloveth.firebaseandroidauthsample.data
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import io.wellnesscity.data.model.User
 import javax.inject.Inject
@@ -11,8 +13,8 @@ class FireBaseSource @Inject constructor(private val firebaseAuth: FirebaseAuth,
 
 
     fun signInUser(email: String,password: String) = firebaseAuth.signInWithEmailAndPassword(email,password)
-//
-//    fun signInWithGoogle(acct:GoogleSignInAccount) = firebaseAuth.signInWithCredential(GoogleAuthProvider.getCredential(acct.idToken,null))
+   fun signInWithGoogle(acct: GoogleSignInAccount) = firebaseAuth.signInWithCredential(
+       GoogleAuthProvider.getCredential(acct.idToken,null))
 
      fun saveUser(email: String,name:String)=firestore.collection("users").document(email).set(User(email = email,fullName = name))
 

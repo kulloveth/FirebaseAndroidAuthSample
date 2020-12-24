@@ -1,5 +1,6 @@
-package com.kulloveth.firebaseandroidauthsample.data
+package io.kulloveth.firebaseandroidauthsample.data
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import javax.inject.Inject
 
 class Repository @Inject constructor(private val fireBaseSource: FireBaseSource) {
@@ -10,7 +11,7 @@ class Repository @Inject constructor(private val fireBaseSource: FireBaseSource)
 
     fun signInUser(email: String, password: String) = fireBaseSource.signInUser(email, password)
 
-//    fun signInWithGoogle(acct: GoogleSignInAccount) = fireBaseSource.signInWithGoogle(acct)
+ fun signInWithGoogle(acct: GoogleSignInAccount) = fireBaseSource.signInWithGoogle(acct)
 
     fun saveUser(email: String, name: String) = fireBaseSource.saveUser(email, name)
 

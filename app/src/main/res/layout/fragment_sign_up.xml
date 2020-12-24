@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.signup.SignUpFragment">
+    tools:context="io.kulloveth.firebaseandroidauthsample.ui.signup.SignUpFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -145,6 +145,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/orTv"
             app:layout_constraintTop_toTopOf="@id/orTv" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/google_signIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/orTv"
+            android:layout_marginBottom="@dimen/dimens_100dp"
+            android:layout_marginStart="@dimen/standard_padding"
+            android:layout_marginEnd="@dimen/standard_padding" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

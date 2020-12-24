@@ -1,4 +1,4 @@
-package com.kulloveth.firebaseandroidauthsample.data
+package io.kulloveth.firebaseandroidauthsample.data
 
 import android.content.Context
 import android.net.ConnectivityManager

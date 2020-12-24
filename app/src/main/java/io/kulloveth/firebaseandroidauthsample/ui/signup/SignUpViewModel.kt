@@ -1,4 +1,4 @@
-package com.kulloveth.firebaseandroidauthsample.ui.signup
+package io.kulloveth.firebaseandroidauthsample.ui.signup
 
 import android.text.TextUtils
 import androidx.hilt.lifecycle.ViewModelInject
@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.kulloveth.firebaseandroidauthsample.data.NetworkControl
-import com.kulloveth.firebaseandroidauthsample.data.Repository
+import io.kulloveth.firebaseandroidauthsample.data.NetworkControl
+import io.kulloveth.firebaseandroidauthsample.data.Repository
 import io.wellnesscity.data.model.Resource
 import io.wellnesscity.data.model.User
 

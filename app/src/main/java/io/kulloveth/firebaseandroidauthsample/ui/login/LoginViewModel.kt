@@ -1,13 +1,14 @@
-package com.kulloveth.firebaseandroidauthsample.ui.login
+package io.kulloveth.firebaseandroidauthsample.ui.login
 
 import android.text.TextUtils
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
-import com.kulloveth.firebaseandroidauthsample.data.NetworkControl
-import com.kulloveth.firebaseandroidauthsample.data.Repository
+import io.kulloveth.firebaseandroidauthsample.data.NetworkControl
+import io.kulloveth.firebaseandroidauthsample.data.Repository
 import io.wellnesscity.data.model.Resource
 import io.wellnesscity.data.model.User
 import timber.log.Timber
@@ -67,15 +68,15 @@ class LoginViewModel @ViewModelInject constructor(
         return userLiveData
     }
 
-//    fun signInWithGoogle(acct: GoogleSignInAccount):LiveData<Resource<User>>{
-//      repository.signInWithGoogle(acct).addOnCompleteListener { task->
-//          if (task.isSuccessful){
-//              gmailUserLiveData.postValue(Resource.success(User(firebaseAuth.currentUser?.email!!,firebaseAuth.currentUser?.displayName!!)))
-//          }else{
-//              gmailUserLiveData.postValue(Resource.error(null,"couldn't sign in user"))
-//          }
-//
-//      }
-//        return gmailUserLiveData
-//    }
+    fun signInWithGoogle(acct: GoogleSignInAccount):LiveData<Resource<User>>{
+      repository.signInWithGoogle(acct).addOnCompleteListener { task->
+          if (task.isSuccessful){
+              gMailUserLiveData.postValue(Resource.success(User(firebaseAuth.currentUser?.email!!,firebaseAuth.currentUser?.displayName!!)))
+          }else{
+              gMailUserLiveData.postValue(Resource.error(null,"couldn't sign in user"))
+          }
+
+      }
+        return gMailUserLiveData
+    }
 }

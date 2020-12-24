@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.kulloveth.firebaseandroidauthsample.ui.login.LoginFragment"
+        android:name="io.kulloveth.firebaseandroidauthsample.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -19,16 +19,19 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.kulloveth.firebaseandroidauthsample.ui.signup.SignUpFragment"
+        android:name="io.kulloveth.firebaseandroidauthsample.ui.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment" />
     </fragment>
     <fragment
         android:id="@+id/dashBoardFragment"
-        android:name="com.kulloveth.firebaseandroidauthsample.ui.dashboard.DashBoardFragment"
+        android:name="io.kulloveth.firebaseandroidauthsample.ui.dashboard.DashBoardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <argument

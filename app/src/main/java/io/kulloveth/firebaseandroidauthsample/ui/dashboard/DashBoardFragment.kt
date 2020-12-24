@@ -1,4 +1,4 @@
-package com.kulloveth.firebaseandroidauthsample.ui.dashboard
+package io.kulloveth.firebaseandroidauthsample.ui.dashboard
 
 import android.os.Bundle
 import android.util.Log
@@ -11,9 +11,9 @@ import androidx.navigation.fragment.navArgs
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.FirebaseAuth
-import com.kulloveth.firebaseandroidauthsample.R
-import com.kulloveth.firebaseandroidauthsample.databinding.FragmentDashboardBinding
-import com.kulloveth.firebaseandroidauthsample.ui.login.LoginViewModel
+import io.kulloveth.firebaseandroidauthsample.R
+import io.kulloveth.firebaseandroidauthsample.databinding.FragmentDashboardBinding
+import io.kulloveth.firebaseandroidauthsample.ui.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
