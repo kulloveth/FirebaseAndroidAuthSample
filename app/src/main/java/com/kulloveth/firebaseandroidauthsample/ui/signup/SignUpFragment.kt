@@ -50,11 +50,11 @@ class SignUpFragment : Fragment() {
             val emailText = binding?.emailEt?.text?.toString()
             val passwordText =  binding?.passwordEt?.text.toString()
             val fullNameText =  binding?.fullNameEt?.text?.toString()
-            viewModel.signUpUser( emailText!!, passwordText, fullNameText!!).observe(viewLifecycleOwner, {
+            viewModel.signUpUser( emailText.toString(), passwordText, fullNameText.toString()).observe(viewLifecycleOwner, {
                         when (it.status) {
                             Status.SUCCESS -> {
+                                viewModel.saveUser( it.data?.email.toString(), it.data?.fullName.toString())
                                 view.showsnackBar("User account registered")
-                               // viewModel.saveUser( emailText, fullNameText)
                             }
                             Status.ERROR -> {
                                 view.showsnackBar(it.message!!)

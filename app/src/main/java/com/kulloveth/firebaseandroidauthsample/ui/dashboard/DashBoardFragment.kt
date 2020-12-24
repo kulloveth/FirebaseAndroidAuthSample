@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import coil.api.load
 import coil.transform.CircleCropTransformation
 import com.google.firebase.auth.FirebaseAuth
@@ -47,9 +48,10 @@ class DashBoardFragment : Fragment() {
         Log.d("user", "user ${fAuth.currentUser?.photoUrl}")
 
 
+        val args : DashBoardFragmentArgs by navArgs()
         binding?.signTv?.text = String.format(
             resources.getString(R.string.user_greet),
-            fAuth.currentUser?.displayName
+            args.name
         )
     }
 

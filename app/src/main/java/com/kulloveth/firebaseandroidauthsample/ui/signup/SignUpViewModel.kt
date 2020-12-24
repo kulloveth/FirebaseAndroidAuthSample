@@ -18,6 +18,8 @@ class SignUpViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val userLiveData = MutableLiveData<Resource<User>>()
+    private val _saveUserLiveData = MutableLiveData<Resource<User>>()
+    val saveUserLiveData = _saveUserLiveData
     fun signUpUser(email: String, password: String, fullName: String): LiveData<Resource<User>> {
                 when {
                     TextUtils.isEmpty(email) && TextUtils.isEmpty(password) && TextUtils.isEmpty( fullName ) -> {
@@ -35,7 +37,7 @@ class SignUpViewModel @ViewModelInject constructor(
                                             firebaseAuth.currentUser?.sendEmailVerification()
                                             userLiveData.postValue( Resource.success( User( email = email, fullName = fullName )))
                                         } else {
-                                            userLiveData.postValue( Resource.error(null, it.exception.toString()))
+                                            userLiveData.postValue( Resource.error(null, it.exception?.message.toString()))
                                         } }
                             } else {
                                 userLiveData.postValue(Resource.error(null, "email already exist"))
@@ -46,10 +48,13 @@ class SignUpViewModel @ViewModelInject constructor(
         return userLiveData
    }
 
-//    fun saveUser(email: String, name: String) {
-//        repository.saveUser(email, name).addOnCompleteListener {
-//            if (it.isSuccessful) {
-//
-//            }
-//        }
+    fun saveUser(email: String, name: String) {
+        repository.saveUser(email, name).addOnCompleteListener {
+            if (it.isSuccessful) {
+            _saveUserLiveData.postValue(Resource.success(User(email,name)))
+            }else{
+                _saveUserLiveData.postValue(Resource.error(null,it.exception?.message.toString()))
+            }
+        }
+    }
 }

@@ -30,5 +30,10 @@
         android:id="@+id/dashBoardFragment"
         android:name="com.kulloveth.firebaseandroidauthsample.ui.dashboard.DashBoardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="user" />
+    </fragment>
 </navigation>

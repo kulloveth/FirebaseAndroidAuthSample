@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">FirebaseAndroidAuthSample</string>
-    <string name="user_greet">Welcome</string>
+    <string name="user_greet">Welcome %1$s</string>
 </resources>

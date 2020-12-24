@@ -56,7 +56,8 @@ class LoginFragment : Fragment() {
                     Status.SUCCESS -> {
                         view.showsnackBar("Login successful")
                         if (findNavController().currentDestination?.id == R.id.loginFragment) {
-                            NavHostFragment.findNavController(this).navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment())
+                            NavHostFragment.findNavController(this)
+                                .navigate(LoginFragmentDirections.actionLoginFragmentToDashBoardFragment(it.data?.fullName!!))
                         }
                     }
 
