@@ -89,13 +89,10 @@ class LoginFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
 
-            //Getting the GoogleSignIn Task
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                //Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
 
-                //authenticating with firebase
                 viewModel.signInWithGoogle(account!!).observe(viewLifecycleOwner, {
                     if (it.status == Status.SUCCESS) {
                         if (findNavController().currentDestination?.id == R.id.loginFragment) {
@@ -115,10 +112,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun signIn() {
-        //getting the google signin intent
+
         val signInIntent: Intent = googleSignInClient.signInIntent
 
-        //starting the activity for result
         startActivityForResult(signInIntent, RC_SIGN_IN)
 
     }
