@@ -13,11 +13,13 @@ class FireBaseSource @Inject constructor(private val firebaseAuth: FirebaseAuth,
 
 
     fun signInUser(email: String,password: String) = firebaseAuth.signInWithEmailAndPassword(email,password)
-   fun signInWithGoogle(acct: GoogleSignInAccount) = firebaseAuth.signInWithCredential(
-       GoogleAuthProvider.getCredential(acct.idToken,null))
 
-     fun saveUser(email: String,name:String)=firestore.collection("users").document(email).set(User(email = email,fullName = name))
+    fun signInWithGoogle(acct: GoogleSignInAccount) = firebaseAuth.signInWithCredential(GoogleAuthProvider.getCredential(acct.idToken,null))
+
+    fun saveUser(email: String,name:String)=firestore.collection("users").document(email).set(User(email = email,fullName = name))
 
     fun fetchUser()=firestore.collection("users").get()
+
+    fun sendForgotPassword(email: String) = firebaseAuth.sendPasswordResetEmail(email)
 
 }

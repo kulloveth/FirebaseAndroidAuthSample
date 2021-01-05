@@ -1,5 +1,6 @@
 package io.kulloveth.firebaseandroidauthsample.ui.login
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,10 +14,11 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.textfield.TextInputEditText
+import dagger.hilt.android.AndroidEntryPoint
 import io.kulloveth.firebaseandroidauthsample.R
 import io.kulloveth.firebaseandroidauthsample.databinding.FragmentLoginBinding
 import io.kulloveth.firebaseandroidauthsample.ui.signup.showsnackBar
-import dagger.hilt.android.AndroidEntryPoint
 import io.wellnesscity.data.model.Status
 import io.wellnesscity.utils.Constants.RC_SIGN_IN
 import javax.inject.Inject
@@ -48,12 +50,13 @@ class LoginFragment : Fragment() {
         binding?.signUpTv?.setOnClickListener {
 
             if (findNavController().currentDestination?.id == R.id.loginFragment) {
-                NavHostFragment.findNavController(this).navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+                NavHostFragment.findNavController(this)
+                    .navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
             }
         }
         binding?.signInBtn?.setOnClickListener {
             val emailText = binding?.emailEt?.text?.toString()
-            val passwordText =  binding?.passwordEt?.text.toString()
+            val passwordText = binding?.passwordEt?.text.toString()
             viewModel.signInUser(emailText!!, passwordText).observe(viewLifecycleOwner, {
                 when (it.status) {
                     Status.LOADING -> {
@@ -82,6 +85,20 @@ class LoginFragment : Fragment() {
         binding?.googleSignIn?.setOnClickListener {
             signIn()
         }
+        val dialog = AlertDialog.Builder(requireContext())
+        val inflater = (requireActivity()).layoutInflater
+        val v = inflater.inflate(R.layout.forgot_password, null)
+        dialog.setView(v)
+            .setCancelable(false)
+        val emailEt = v.findViewById<TextInputEditText>(R.id.emailEt)
+        val d = dialog.create()
+        binding?.forgotPasswordTv?.setOnClickListener {
+
+//            viewModel.sendResetPassword(binding?.emailEt?.toString()!!).observeForever {
+//
+//            }
+            d.show()
+        }
     }
 
 
@@ -99,7 +116,7 @@ class LoginFragment : Fragment() {
                             NavHostFragment.findNavController(this).navigate(
                                 LoginFragmentDirections.actionLoginFragmentToDashBoardFragment(it?.data?.fullName!!)
                             )
-                           // Timber.d("display ${fAuth.currentUser?.displayName} ")
+                            // Timber.d("display ${fAuth.currentUser?.displayName} ")
                         }
                     } else if (it.status == Status.ERROR) {
                         requireView().showsnackBar(it.message!!)
