@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import io.kulloveth.firebaseandroidauthsample.R
@@ -90,13 +91,25 @@ class LoginFragment : Fragment() {
         val v = inflater.inflate(R.layout.forgot_password, null)
         dialog.setView(v)
             .setCancelable(false)
-        val emailEt = v.findViewById<TextInputEditText>(R.id.emailEt)
         val d = dialog.create()
-        binding?.forgotPasswordTv?.setOnClickListener {
+        val emailEt = v.findViewById<TextInputEditText>(R.id.emailEt)
+        val sendBtn = v.findViewById<MaterialButton>(R.id.sendEmailBtn)
+        val dismissBtn = v.findViewById<MaterialButton>(R.id.dismissBtn)
+        sendBtn.setOnClickListener {
+            viewModel.sendResetPassword(emailEt?.text.toString()).observeForever {
+                if (it.status == Status.SUCCESS){
+                    view.showsnackBar("reset email sent")
+                }else{
+                    view.showsnackBar(it.message.toString())
+                }
+            }
+        }
+        dismissBtn.setOnClickListener {
+            d.dismiss()
+        }
 
-//            viewModel.sendResetPassword(binding?.emailEt?.toString()!!).observeForever {
-//
-//            }
+
+        binding?.forgotPasswordTv?.setOnClickListener {
             d.show()
         }
     }
