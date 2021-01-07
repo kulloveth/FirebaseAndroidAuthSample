@@ -112,22 +112,27 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     fun sendResetPassword(email: String): LiveData<Resource<User>> {
-        repository.sendForgotPassword(email).addOnCompleteListener { task ->
-            if (TextUtils.isEmpty(email)) {
+
+        when {
+            TextUtils.isEmpty(email) -> {
                 sendResetPasswordLiveData.postValue(Resource.error(null, "Enter registered email"))
-            } else if (networkControl.isConnected()) {
-                sendResetPasswordLiveData.postValue(Resource.loading(null))
-                if (task.isSuccessful) {
-                    sendResetPasswordLiveData.postValue(Resource.success(User()))
-                } else {
-                    sendResetPasswordLiveData.postValue(
-                        Resource.error(
-                            null,
-                            task.exception?.message.toString()
+            }
+            networkControl.isConnected() -> {
+                repository.sendForgotPassword(email).addOnCompleteListener { task ->
+                    sendResetPasswordLiveData.postValue(Resource.loading(null))
+                    if (task.isSuccessful) {
+                        sendResetPasswordLiveData.postValue(Resource.success(User()))
+                    } else {
+                        sendResetPasswordLiveData.postValue(
+                            Resource.error(
+                                null,
+                                task.exception?.message.toString()
+                            )
                         )
-                    )
+                    }
                 }
-            } else {
+            }
+            else -> {
                 sendResetPasswordLiveData.postValue(Resource.error(null, "No internet connection"))
             }
         }

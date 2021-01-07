@@ -86,6 +86,8 @@ class LoginFragment : Fragment() {
         binding?.googleSignIn?.setOnClickListener {
             signIn()
         }
+
+
         val dialog = AlertDialog.Builder(requireContext())
         val inflater = (requireActivity()).layoutInflater
         val v = inflater.inflate(R.layout.forgot_password, null)
@@ -95,8 +97,10 @@ class LoginFragment : Fragment() {
         val emailEt = v.findViewById<TextInputEditText>(R.id.emailEt)
         val sendBtn = v.findViewById<MaterialButton>(R.id.sendEmailBtn)
         val dismissBtn = v.findViewById<MaterialButton>(R.id.dismissBtn)
+
+
         sendBtn.setOnClickListener {
-            viewModel.sendResetPassword(emailEt?.text.toString()).observeForever {
+            viewModel.sendResetPassword(emailEt.text.toString()).observeForever {
                 if (it.status == Status.SUCCESS){
                     view.showsnackBar("reset email sent")
                 }else{
