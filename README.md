@@ -20,3 +20,12 @@ A sample simplifying firebase authentication with email and google in android
     </td>
   </tr>
 </table>
+
+### Libraries used
+* Firebase
+* Hilt-Android
+* Navigation Components
+* ViewModel
+* LiveData
+* ViewBinding
+* Timber
