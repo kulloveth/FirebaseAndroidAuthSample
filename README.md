@@ -12,7 +12,7 @@ A sample simplifying firebase authentication with email and google in android
     </td>
   </tr>
     <td>
-     <img src="/screenshot/passworddialog.png"/>
+     <img src="/screenshot/pasworddialog.png"/>
    </td>
 
    <td>
