@@ -24,7 +24,6 @@ class LoginViewModel @ViewModelInject constructor(
     private val gMailUserLiveData = MutableLiveData<Resource<User>>()
     private val sendResetPasswordLiveData = MutableLiveData<Resource<User>>()
     fun signInUser(email: String, password: String): LiveData<Resource<User>> {
-
         when {
             TextUtils.isEmpty(email) && TextUtils.isEmpty(password) -> {
                 userLiveData.postValue(Resource.error(null, "Enter email and password"))
@@ -32,6 +31,7 @@ class LoginViewModel @ViewModelInject constructor(
             networkControl.isConnected() -> {
                 userLiveData.postValue(Resource.loading(null))
                 firebaseAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener {
+                    //check if email exists
                     if (it.result?.signInMethods?.size == 0) {
                         userLiveData.postValue(Resource.error(null, "Email does not exist"))
                     } else {
@@ -44,46 +44,19 @@ class LoginViewModel @ViewModelInject constructor(
                                                 userTask.result?.documents?.forEach {
                                                     if (it.data!!["email"] == email) {
                                                         val name = it.data?.getValue("fullName")
-                                                        userLiveData.postValue(
-                                                            Resource.success(
-                                                                User(
-                                                                    firebaseAuth.currentUser?.email!!,
-                                                                    name?.toString()!!
-                                                                )
-                                                            )
-                                                        )
-                                                    }
-                                                }
+                                                        userLiveData.postValue(Resource.success(User(firebaseAuth.currentUser?.email!!, name?.toString()!!)
+                                                            )) } }
                                             } else {
-                                                userLiveData.postValue(
-                                                    Resource.error(
-                                                        null,
-                                                        userTask.exception?.message.toString()
-                                                    )
-                                                )
+                                                userLiveData.postValue(Resource.error(null, userTask.exception?.message.toString()))
                                             }
                                         }
                                     } else {
-                                        userLiveData.postValue(
-                                            Resource.error(
-                                                null,
-                                                "Email is not verified, check your email"
-                                            )
-                                        )
-                                    }
-                                }
+                                        userLiveData.postValue(Resource.error(null, "Email is not verified, check your email"))
+                                    } }
                             } else {
-                                userLiveData.postValue(
-                                    Resource.error(
-                                        null,
-                                        task.exception?.message.toString()
-                                    )
-                                )
+                                userLiveData.postValue(Resource.error(null, task.exception?.message.toString()))
                                 Timber.e(task.exception.toString())
-                            }
-                        }
-                    }
-                }
+                            } } } }
             }
             else -> {
                 userLiveData.postValue(Resource.error(null, "No internet connection"))

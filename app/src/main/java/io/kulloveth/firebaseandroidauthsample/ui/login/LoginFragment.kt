@@ -88,6 +88,7 @@ class LoginFragment : Fragment() {
         }
 
 
+        //forget password
         val dialog = AlertDialog.Builder(requireContext())
         val inflater = (requireActivity()).layoutInflater
         val v = inflater.inflate(R.layout.forgot_password, null)
